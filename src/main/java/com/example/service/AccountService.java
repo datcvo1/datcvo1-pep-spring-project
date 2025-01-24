@@ -7,12 +7,14 @@ import com.example.entity.Account;
 import com.example.repository.AccountRepository;
 
 @Service
-public class AccountService {  
-    @Autowired
+public class AccountService {
+    @Autowired  
     AccountRepository accRepo;
 
+    public Account registration(Account acc) {
+        if(accRepo.existsAccountByUsername(acc.getUsername()))
+            return null;
 
-    public Account registration(Account Acc) {
-        return null;
+        return accRepo.save(acc);
     }
 }

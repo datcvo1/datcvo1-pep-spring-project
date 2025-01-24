@@ -24,14 +24,14 @@ public class SocialMediaController {
     MessageService msgService;
 
     @PostMapping("/register")
-    public ResponseEntity example(@RequestBody Account newAcc){
+    public ResponseEntity example(@RequestBody Account body){
+        Account newAcc = accService.registration(body);
 
-        if(accService.registration(newAcc) == null)
+        if(newAcc == null)
             return ResponseEntity.status(409).body("Username already exists.");
-        
-        if(newAcc.getUsername().isEmpty())
+        else if(newAcc.getUsername().isEmpty())
             return ResponseEntity.status(400).body("Username cannot be blank.");
- 
-        return ResponseEntity.status(400).body("Could not create username");
+        
+        return ResponseEntity.status(200).body(newAcc);
     }
 }
