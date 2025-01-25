@@ -7,5 +7,6 @@ import com.example.entity.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
-    boolean existsAccountByUsername(String username);   // this is a derived query method
+    boolean existsByUsername(String username);   // this is a derived query method
+    Account findByUsernameAndPassword(String username, String password);
 }

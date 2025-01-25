@@ -12,9 +12,13 @@ public class AccountService {
     AccountRepository accRepo;
 
     public Account registration(Account acc) {
-        if(accRepo.existsAccountByUsername(acc.getUsername()))
+        if(accRepo.existsByUsername(acc.getUsername()))
             return null;
 
         return accRepo.save(acc);
+    }
+
+    public Account login(Account acc) {
+        return accRepo.findByUsernameAndPassword(acc.getUsername(), acc.getPassword());
     }
 }
